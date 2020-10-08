@@ -1,0 +1,66 @@
+{
+    "name": "vicchiam/uoc-com-elec-pr1",
+    "authors": [
+        {
+            "name": "Victor Chisvert",
+            "email": "vicchiam81@gmail.com"
+        }
+    ],
+    "config": {
+    	"vendor-dir": "libs"
+    },
+    "repositories": [
+	{
+            "type": "package",
+	    "package": {
+	        "name": "js/jquery",
+	        "version": "3.5.1",
+		"type": "jquery",
+		"dist": {
+		    "url": "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",
+		    "type": "file"
+		}
+	    }
+	},
+	{
+	    "type": "package",
+	    "package": {
+	       "name": "css/bootstrap",
+	       "version": "4.5",
+	       "dist": {
+	           "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
+		   "type": "file"
+	       }
+	    }
+	},
+	{
+	    "type": "package",
+	    "package": {
+	       "name": "js/bootstrap",
+	       "version": "4.5",
+	       "dist": {
+	           "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js",
+		   "type": "file"
+	       }
+	    }
+	},
+	{
+	    "type": "package",
+	    "package": {
+	       "name": "js/popper",
+	       "version": "1.16",
+	       "dist": {
+	           "url": "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js",
+		   "type": "file"
+	       }
+	    }
+	}
+    ],
+    "require": {
+       "js/jquery": "3.5.1",
+       "css/bootstrap": "4.5",
+       "js/bootstrap": "4.5",
+       "js/popper": "1.16" 
+    }
+
+}
