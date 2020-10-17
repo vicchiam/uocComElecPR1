@@ -10,16 +10,16 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="libs/css/bootstrap/bootstrap.min.css">
 
-        <link rel="stylesheet" href="libs/css/style.css">
+        <link rel="stylesheet" href="public/css/style.css">
 
         <script src="libs/js/jquery/jquery.min.js" ></script>
 
         <title>La Tiendecilla</title>
     </head>
     <body>
-        <?php include('php/menu.php'); ?>
+        <?php include('public/php/menu.php'); ?>
         <div id="main">
-            <?php include('php/index.php'); ?>
+            <?php include('public/php/inicio.php'); ?>
         </div>
         <script src="libs/js/popper/popper.min.js" ></script>
         <script src="libs/js/bootstrap/bootstrap.min.js" ></script>
