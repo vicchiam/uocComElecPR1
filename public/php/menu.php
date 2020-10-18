@@ -7,23 +7,25 @@
         <a class="navbar-brand font-shrikhand text-white ml-2" href="/">
             La Tiendecilla
         </a>
-        <ul class="navbar-nav mr-auto">      
+        <ul class="navbar-nav mr-auto">                  
             <li class="nav-item">
-                <a class="nav-link active" id="inicio" href="#">Inicio</a>
-            </li>  
-            <li class="nav-item">
-                <a class="nav-link" id="categorias" href="#">Categorias</a>
+                <a class="nav-link active" id="categorias" href="#">Categorias</a>
             </li>   
             <li class="nav-item">
                 <a class="nav-link" id="productos" href="#">Productos</a>
+            </li>
+            <?php if($login) { ?>
+             <li class="nav-item">
+                <a class="nav-link" id="productos" href="#">Pedidos</a>
             </li> 
+            <?php } ?>
         </ul>
         <div class="float-right">
             <img class="btn-img btn-circle bg-white" title="Carrito" src="resources/shopping_cart-24px.svg" />
             <?php if(!$login){ ?>
-            <img class="btn-img btn-circle bg-white ml-2" title="Iniciar Sesión" src="resources/account_circle-24px.svg" onClick="openLogin()"/>
+            <img class="btn-img btn-circle bg-white ml-2" title="Iniciar Sesión" src="resources/account_circle-24px.svg" onclick="openLogin()"/>
             <?php } else{ ?>
-            <img class="btn-img btn-circle bg-white ml-2" title="Iniciar Sesión" src="resources/exit_to_app-24px.svg" />
+            <img class="btn-img btn-circle bg-white ml-2" title="Iniciar Sesión" src="resources/exit_to_app-24px.svg" onclick="logout()"/>
             <?php } ?>
         </div>
     </nav>    
@@ -39,13 +41,13 @@
             </div>
             <div class="modal-body">
                 <div class="p-2">
-                    <input type="text" id="username" class="form-control" placeholder="Usuario" />
-                    <input type="password" id="pass" class="form-control mt-2" />
+                    <input type="text" id="user" class="form-control" placeholder="Usuario" />
+                    <input type="password" id="pass" class="form-control mt-2" placeholder="Contraseña" />
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Iniciar Sesión</button>
+                <button type="button" class="btn btn-primary" onclick="login()">Iniciar Sesión</button>
             </div>
         </div>
     </div>
@@ -57,19 +59,9 @@
             $('.active').removeClass('active');
             $(this).addClass('active');
             var id=$(this).attr('id');
-            $.get('public/php/'+id+'.php')
-                .done(function(response){                   
-                    $('#main').html(response);                                      
-                })
-        })  
-
-        function openLogin(){
-            $('#modal-login').modal('show');
-        }
-
-        function startSession(){
-            
-        }
+            var url='public/php/'+id+'.php';
+            navigateTo(url);
+        })          
 
     </script>   
 </div>

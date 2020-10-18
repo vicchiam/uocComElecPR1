@@ -1,3 +1,4 @@
 /libs/
 *.lock
+/php/config.php
 
