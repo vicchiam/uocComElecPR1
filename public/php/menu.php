@@ -3,16 +3,16 @@
     $login=(isset($_SESSION["login"])?1:0);
 ?>
 <div class="container-fluid p-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark m-0">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark m-0">
         <a class="navbar-brand font-shrikhand text-white ml-2" href="/">
             La Tiendecilla
         </a>
         <ul class="navbar-nav mr-auto">                  
             <li class="nav-item">
-                <a class="nav-link active" id="categorias" href="#">Categorias</a>
+                <a class="nav-link active" id="inicio" href="#">Categorias</a>
             </li>   
             <li class="nav-item">
-                <a class="nav-link" id="productos" href="#">Productos</a>
+                <a class="nav-link" id="categoria" href="#">Productos</a>
             </li>
             <?php if($login) { ?>
              <li class="nav-item">

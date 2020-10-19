@@ -19,7 +19,7 @@
 				if(strlen($cat["descripcion"])>100) $title=$cat["descripcion"];
 		?>	
 		<div class="categoria">
-			<div onclick="navigateTo('public/php/productos.php?id=<?php echo $cat["id"] ?>&nombre=<?php echo $cat["nombre"] ?>')">
+			<div onclick="navigateTo('public/php/categoria.php?id=<?php echo $cat["id"] ?>&nombre=<?php echo $cat["nombre"] ?>')">
 				<h3><?php echo $cat["nombre"] ?></h3>
 				<img class="cat-img" src="<?php echo $cat["img"] ?>" />				
 				<p class="p-1" title="<?php echo $title ?>"><?php echo $cat["descripcion"] ?></p>			
@@ -48,9 +48,18 @@
             <div class="modal-body">
             	<input type="hidden" id="id_categoria" value="" />
                 <div class="p-2">
-                    <input type="text" id="nombre" class="form-control mt-1" placeholder="Nombre" />
-                    <input type="text" id="img" class="form-control mt-1" placeholder="Enlace a imagen" />
-                    <textarea id="descripcion" class="form-control mt-1" placeholder="Descripción"></textarea>
+                	<div class="form-group">
+                		<label>Nombre</label>
+                    	<input type="text" id="nombre" class="form-control mt-1" />
+                    </div>
+                    <div class="form-group">
+                		<label>Enlace a imagen</label>
+                    	<input type="text" id="img" class="form-control mt-1" />
+                    </div>
+                    <div class="form-group">
+                		<label>Descripción</label>
+                    	<textarea id="descripcion" class="form-control mt-1" ></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

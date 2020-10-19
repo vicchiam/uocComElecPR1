@@ -3,7 +3,7 @@
 }
 
 html, body{
-	width: 100%;
+	width: 100vw;
     height: 100vh;
     font-size: 14px;
 }
@@ -36,6 +36,10 @@ h2{
 	border-radius: 13px
 }
 
+
+#main{
+	padding-top: 50px;
+}
 
 /*****Categoria*************************/
 
@@ -112,4 +116,15 @@ h2{
 .producto p{
 	height: 50px;
 	overflow: hidden;
+}
+
+/*********Ficha*******************/
+
+#ficha #img_ficha{
+	width: 75%;
+	object-fit: fill;
+	float: left;
+	margin-right: 10px;
+	border-right: 1px solid #ccc;
+	padding-left: 10px;
 }

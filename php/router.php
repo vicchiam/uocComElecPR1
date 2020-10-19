@@ -23,6 +23,18 @@
 	else if($action=="delete-categoria"){
 		echo Logic::deleteCategoria();
 	}	
+	else if($action=="get-ficha"){
+		echo Logic::getProducto();
+	}
+	else if($action=="get-producto"){
+		echo Logic::getProducto();
+	}
+	else if($action=="save-producto"){
+		echo Logic::saveProducto();
+	}
+	else if($action=="delete-producto"){
+		echo Logic::deleteProducto();
+	}
 	else{
 		echo json_encode(
 			array(

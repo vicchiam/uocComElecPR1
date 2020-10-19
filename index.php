@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
+        <meta http-equiv=”Content-Language” content=”es”/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>La Tiendecilla</title>
@@ -23,7 +24,7 @@
         <?php include('public/php/menu.php'); ?>
         </div>
         <div id="main">
-            <?php include('public/php/categorias.php'); ?>
+            <?php include('public/php/inicio.php'); ?>
         </div>
         <script src="libs/js/popper/popper.min.js" ></script>
         <script src="libs/js/bootstrap/bootstrap.min.js" ></script>

@@ -71,6 +71,37 @@
 			return BD::query($sql);
 		}
 
+		public static function getProducto($id){
+			$sql="
+				select
+					*
+				from
+					producto
+				where
+					id=".$id."
+			";
+			return BD::query($sql);	
+		}
+
+		public static function insertProducto($nombre,$img,$descripcion,$precio,$unidad,$tamanyo,$edad,$id_categoria){
+			$sql="
+				insert into producto (nombre,img,descripcion,precio,unidad,tamanyo,edad,id_categoria) values('".$nombre."','".$img."','".$descripcion."','".$precio."','".$unidad."','".$tamanyo."','".$edad."','".$id_categoria."')
+			";
+			return BD::insert($sql);
+		}
+
+		public static function updateProducto($id,$nombre,$img,$descripcion,$precio,$unidad,$tamanyo,$edad,$id_categoria){
+			$sql="
+				update producto set nombre='".$nombre."', img='".$img."', descripcion='".$descripcion."', precio='".$precio."', unidad='".$unidad."', tamanyo='".$tamanyo."', edad='".$edad."', id_categoria='".$id_categoria."' where id='".$id."'
+			";
+			return BD::update($sql);
+		}
+
+		public static function deleteProducto($id){
+			$sql="delete from producto where id='".$id."'";
+			return BD::delete($sql);
+		}
+
 	}
 
 	
