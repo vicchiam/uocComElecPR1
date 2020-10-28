@@ -1,6 +1,12 @@
 <?php
+    include_once($_SERVER["DOCUMENT_ROOT"]."/uocComElecPR1/php/logic.php");
+
     @session_start();
     $login=(isset($_SESSION["login"])?1:0);
+
+    $carrito=Logic::getCarrito();
+    $num=count($carrito);
+
 ?>
 <div class="container-fluid p-0">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark m-0">
@@ -21,7 +27,10 @@
             <?php } ?>
         </ul>
         <div class="float-right">
-            <img class="btn-img btn-circle bg-white" title="Carrito" src="resources/shopping_cart-24px.svg" />
+            <div class="d-inline-block" id="carrito" onclick="openCarrito()">
+                <img class="btn-img btn-circle bg-white" title="Carrito" src="resources/shopping_cart-24px.svg" />
+                <span id="cantidad_carrito" class="badge badge-danger <?php if($num==0) echo "d-none" ?>" ><?php echo $num ?></span>
+            </div>
             <?php if(!$login){ ?>
             <img class="btn-img btn-circle bg-white ml-2" title="Iniciar Sesión" src="resources/account_circle-24px.svg" onclick="openLogin()"/>
             <?php } else{ ?>

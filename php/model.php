@@ -102,6 +102,25 @@
 			return BD::delete($sql);
 		}
 
+		/*********Carrito*************************/
+
+		public static function getProductosCarrito($ids){
+			$sql="
+				select 
+					id,
+					nombre,
+					descripcion,
+					precio, 
+					unidad,
+					0 as cantidad
+				from
+					producto
+				where
+					id in (".join(',',$ids).")
+			";
+			return BD::query($sql);
+		}
+
 	}
 
 	

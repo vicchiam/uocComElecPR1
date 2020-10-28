@@ -7,6 +7,12 @@ function navigateTo(url){
     })
 }
 
+function navigateLast(){
+	$.get(current).done(result =>{
+        $('#main').html(result);
+    })
+}
+
 function reload(){
 	$.get('public/php/menu.php').done(result =>{
         $('#menu').html(result);
@@ -227,4 +233,81 @@ function deleteProducto(id){
 				alert(result);
 		})
 	}
+}
+
+/*********Carrito********************/
+function addCarrito(){
+	var id=$('#id_ficha').val();
+	$.post('php/router.php', { action: 'add-carrito', id: id })
+		.done(result =>{
+			if(!isNaN(result)){				
+				$('#cantidad_carrito').html(result);
+				if(result>0)
+					$('#cantidad_carrito').removeClass('d-none');	
+				alert('Producto añadido');
+				$('#modal-ficha-producto').modal('hide');
+			}
+			else
+				alert(result);
+		})
+}
+
+function openCarrito(){
+    $.get('public/php/carrito.php', {action: 'get-carrito'})
+        .done(result => {
+        	$('#main').html(result);
+        })
+}
+
+function recalcularCarrito(){
+	var total_carrito=0;
+	$('.linea-carrito').each(function(){
+		var precios = $(this).find('.precio');
+		var cantidades = $(this).find('.cantidad');
+		var totales = $(this).find('.total');		
+		for(var i=0;i<precios.length;i++){
+			var p = parseFloat(precios[i].innerText);
+			var c = parseFloat(cantidades[i].value);
+			if(isNaN(c)) 
+				return alert("Existe una cantidad errónea");
+			if(c<0)
+				return alert("No puede ser cantidades menor que 0");
+			var t = p*c;
+			totales[i].innerText = t;
+			total_carrito+=t;
+		}
+	});
+	$('.total_carrito').html('Total: '+total_carrito+' €');
+}
+
+function deleteCarrito(elem,id){
+	if(confirm("¿Seguro que lo quiere eliminar?")){
+		$.post('php/router.php', {action: 'delete-carrito', id: id})
+		    .done(result => {
+		    	if(!isNaN(result)){				
+					$('#cantidad_carrito').html(result);
+					if(result>0)
+						$('#cantidad_carrito').removeClass('d-none');	
+					$(elem).parent().parent().remove();
+					recalcularCarrito();
+				}
+		    	else
+		    		alert(result);
+		    })
+	}
+}
+
+function eraseCarrito(){
+	if(confirm("¿Seguro que lo quiere eliminar?")){
+		$.post('php/router.php', { action: 'erase-carrito'  })
+			.done(result => {
+				$('#cantidad_carrito').html(0);
+				$('#cantidad_carrito').addClass('d-none');
+				navigateLast();
+			});
+	}
+}
+
+function cancelCarrito(){
+	navigateLast();
 }

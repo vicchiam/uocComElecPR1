@@ -99,6 +99,62 @@
 			return Model::deleteProducto($id);
 		}
 
+		/***********Carrito***************************/
+
+		public static function addCarrito(){
+			@session_start();
+			if(!isset($_SESSION["carrito"]))
+				$_SESSION["carrito"]=array();
+			$id=$_POST["id"];
+			if(!isset($_SESSION["carrito"][$id]))
+				$_SESSION["carrito"][$id]=0;
+			$_SESSION["carrito"][$id]++;
+			return count($_SESSION["carrito"]);
+		}
+
+		public static function getCarrito(){
+			@session_start();
+			if(isset($_SESSION["carrito"]))
+				return $_SESSION["carrito"];
+			return array();
+		}
+
+		public static function getProductosCarrito(){
+			@session_start();
+			if(isset($_SESSION["carrito"])){
+				$productos=Model::getProductosCarrito(array_keys($_SESSION["carrito"]));
+				$res=array();
+				foreach ($productos as $p) {
+					foreach ($_SESSION["carrito"] as $k => $v) {
+						if($p["id"]==$k){
+							$res[]=array(
+								"id"=>$k,
+								"nombre"=>$p["nombre"],
+								"descripcion"=>$p["descripcion"],
+								"precio"=>$p["precio"],
+								"unidad"=>$p["unidad"],
+								"cantidad"=>$v
+							);
+						}
+					}
+				}
+				return $res;
+			}	
+			return array();		
+		}
+
+		public static function deleteCarrito(){
+			@session_start();
+			$id=$_POST["id"];
+			unset($_SESSION["carrito"][$id]);
+			return count($_SESSION["carrito"]);
+		}
+
+		public static function eraseCarrito(){
+			@session_start();
+			$_SESSION["carrito"]=array();
+			return 0;
+		}
 
 	}
 

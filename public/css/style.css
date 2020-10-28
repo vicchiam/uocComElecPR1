@@ -22,6 +22,10 @@ h2{
 	/*color: #fff;*/
 }
 
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
 .font-shrikhand{
 	font-family: 'Shrikhand', cursive;
 }
@@ -35,7 +39,6 @@ h2{
 .btn-circle{
 	border-radius: 13px
 }
-
 
 #main{
 	padding-top: 50px;
@@ -127,4 +130,13 @@ h2{
 	margin-right: 10px;
 	border-right: 1px solid #ccc;
 	padding-left: 10px;
+}
+
+/***********Carro*****************/
+
+#cantidad_carrito{
+	position: relative;
+	left: -15px;
+	top: 10px;
+	cursor: pointer;
 }

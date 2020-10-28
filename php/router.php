@@ -35,6 +35,15 @@
 	else if($action=="delete-producto"){
 		echo Logic::deleteProducto();
 	}
+	else if($action=="add-carrito"){
+		echo Logic::addCarrito();
+	}
+	else if($action=="delete-carrito"){
+		echo Logic::deleteCarrito();
+	}
+	else if($action=="erase-carrito"){
+		echo Logic::eraseCarrito();
+	}
 	else{
 		echo json_encode(
 			array(

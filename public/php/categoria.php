@@ -71,7 +71,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" onclick="">Añadir al carrito</button>
+                <button type="button" class="btn btn-success" onclick="addCarrito()">Añadir al carrito</button>
             </div>
         </div>
     </div>
