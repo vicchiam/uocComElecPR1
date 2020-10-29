@@ -156,6 +156,14 @@
 			return 0;
 		}
 
+		/*************Formulario*****************************/
+
+		public static function loadPaises(){
+			$string = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/uocComElecPR1/resources/paises.json");
+			$json = json_decode($string, true);
+			return $json["paises"];
+		}
+
 	}
 
 ?>
