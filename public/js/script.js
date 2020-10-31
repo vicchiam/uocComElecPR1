@@ -262,20 +262,18 @@ function openCarrito(){
 function recalcularCarrito(){
 	var total_carrito=0;
 	$('.linea-carrito').each(function(){
-		var precios = $(this).find('.precio');
-		var cantidades = $(this).find('.cantidad');
-		var totales = $(this).find('.total');		
-		for(var i=0;i<precios.length;i++){
-			var p = parseFloat(precios[i].innerText);
-			var c = parseFloat(cantidades[i].value);
-			if(isNaN(c)) 
-				return alert("Existe una cantidad errónea");
-			if(c<0)
-				return alert("No puede ser cantidades menor que 0");
-			var t = p*c;
-			totales[i].innerText = t;
-			total_carrito+=t;
-		}
+		var precio = $(this).find('.precio');
+		var cantidad = $(this).find('.cantidad');
+		var total = $(this).find('.total');		
+		var p = parseFloat(precio.html());
+		var c = parseFloat(cantidad.val());		
+		if(isNaN(c)) 
+			return alert("Existe una cantidad errónea");
+		else if(c<0)
+			return alert("No puede ser cantidades menor que 0");
+		var t = p*c;
+		total.html(t);
+		total_carrito+=t;		
 	});
 	$('.total_carrito').html('Total: '+total_carrito+' €');
 }
@@ -310,4 +308,57 @@ function eraseCarrito(){
 
 function cancelCarrito(){
 	navigateLast();
+}
+
+/*************Pedido**********************************/
+
+function addPedido(){
+	var res=[];
+	$('.linea-carrito').each(function(){
+		var id=$(this).data('id');
+		var cantidad=$(this).find('.cantidad');		
+		var obj ={
+			id: id,
+			cantidad: cantidad.val()
+		};		
+		res.push(obj);
+	});
+	var json=JSON.stringify(res);
+	$.post('php/router.php', {action: 'add-pedido', json: json})
+		.done(result =>{
+			if(result=="ok")
+				openPedido();
+			else
+				alert(result);
+		})
+}
+
+function openPedido(){
+	$.get('public/php/pedido.php')
+		.done(result => {
+			$("#body-pedido").html(result);
+			$("#modal-pedido").modal('show');
+		})
+}
+
+function savePedido(){
+	var nombre=$('#nombre').val();
+	var apellidos=$('#apellidos').val();
+	var direccion=$('#direccion').val();
+	var poblacion=$('#poblacion').val();
+	var cp=$('#cp').val();
+	var provincia=$('#provincia').val();
+	var pais=$('#pais').val();
+	var mail=$('#mail').val();
+
+	if(nombre.length==0)
+		return alert("Debes indicar un nombre");
+	if(apellidos.length==0)
+		return alert("Debes indicar unos apellidos");
+	if(direccion.length==0)
+		return alert("Debes indicar la direccion");
+	if(poblacion.length==0)
+		return alert("Debes indicar la poblacion");
+	if(mail.length==0)
+		return alert("Debes indicar un correo electróinico");
 }

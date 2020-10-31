@@ -44,6 +44,9 @@
 	else if($action=="erase-carrito"){
 		echo Logic::eraseCarrito();
 	}
+	else if($action=="add-pedido"){
+		echo Logic::addPedido();
+	}
 	else{
 		echo json_encode(
 			array(

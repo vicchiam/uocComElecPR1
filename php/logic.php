@@ -156,12 +156,23 @@
 			return 0;
 		}
 
-		/*************Formulario*****************************/
+		/*************Pedido*****************************/
 
 		public static function loadPaises(){
 			$string = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/uocComElecPR1/resources/paises.json");
 			$json = json_decode($string, true);
 			return $json["paises"];
+		}
+
+		public static function addPedido(){
+			@session_start();
+			$string=$_POST["json"];
+			$json=json_decode($string, true);
+			$_SESSION["carrito"]=array();
+			foreach ($json as $j) {
+				$_SESSION["carrito"][$j["id"]]=$j["cantidad"];
+			}
+			return "ok";
 		}
 
 	}

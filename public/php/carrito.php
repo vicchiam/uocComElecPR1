@@ -25,7 +25,7 @@
 			foreach ($carrito as $c) {
 				$total+=($c["precio"]*$c["cantidad"]);
 		?>
-			<tr class="linea-carrito">
+			<tr class="linea-carrito" data-id="<?php echo $c["id"] ?>">
 				<td>
 					<img class="btn-img" title="Eliminar" src="resources/delete-24px.svg" onclick="deleteCarrito(this,'<?php echo $c["id"] ?>')" />
 				</td>
@@ -52,9 +52,28 @@
 				</td>
 				<td colspan="4" class="text-right">
 					<button class="btn btn-secondary" onclick="cancelCarrito()">Cancelar</button>
-					<button class="btn btn-success">Realizar Pedido</button>
+					<button class="btn btn-primary" onclick="addPedido()">Realizar Pedido</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
+<div class="modal" tabindex="-1" id="modal-pedido">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Realizar Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0" id="body-pedido">
+            	 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="">Finalizar pedido</button>
+            </div>
+        </div>
+    </div>
 </div>
