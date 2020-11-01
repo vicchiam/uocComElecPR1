@@ -47,6 +47,9 @@
 	else if($action=="add-pedido"){
 		echo Logic::addPedido();
 	}
+	else if($action=="save-pedido"){
+		echo Logic::savePedido();
+	}
 	else{
 		echo json_encode(
 			array(

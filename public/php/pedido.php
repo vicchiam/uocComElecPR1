@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group col-3">
 				<label>Pais:</label>
-				<select class="custom-select" id="pais0"> 
+				<select class="custom-select" id="pais"> 
 				<?php 
 					foreach ($paises as $pais) {
 				?>

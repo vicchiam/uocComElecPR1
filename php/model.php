@@ -121,6 +121,61 @@
 			return BD::query($sql);
 		}
 
+		/********Pedido*****************************/
+
+		public static function getPedidos(){
+			$sql="
+				select 
+					c.id,
+					date_format(c.fecha,'%d-%m-%Y') as fecha,
+					concat(c.nombre,' ',c.apellidos) as nombre,
+					c.mail,
+					c.direccion,
+					c.poblacion,
+					c.cp,
+					c.provincia,
+					c.pais,
+					p.nombre as producto,
+					l.id_pedido,
+					l.precio,
+					l.cantidad
+				from
+					cabecera_pedido c 
+					left join
+					linea_pedido l
+					on
+						l.id_pedido=c.id
+					left join
+					producto p
+					on
+						p.id=l.id_producto
+				order by
+					c.id
+
+			";
+			return BD::query($sql);
+		}
+
+		public static function insertCabeceraPedido($nombre,$apellidos,$direccion,$poblacion,$cp,$provincia,$pais,$mail){
+			$sql="
+				insert into cabecera_pedido 
+					(fecha,nombre,apellidos,direccion,poblacion,cp,provincia,pais,mail) 
+				values
+					(now(),'".$nombre."','".$apellidos."','".$direccion."','".$poblacion."','".$cp."','".$provincia."','".$pais."','".$mail."')
+			";
+			return BD::insert($sql);
+		}
+
+		public static function insertLineaPedido($id_pedido,$id_producto,$cantidad,$precio){
+			$sql="
+				insert into linea_pedido
+					(id_pedido, id_producto, cantidad, precio)
+				values
+					('".$id_pedido."','".$id_producto."','".$cantidad."','".$precio."')
+			";
+			return BD::insert($sql);
+		}
+
 	}
 
 	

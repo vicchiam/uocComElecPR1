@@ -22,7 +22,7 @@
             </li>
             <?php if($login) { ?>
              <li class="nav-item">
-                <a class="nav-link" id="productos" href="#">Pedidos</a>
+                <a class="nav-link" id="pedidos" href="#">Pedidos</a>
             </li> 
             <?php } ?>
         </ul>

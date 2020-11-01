@@ -72,7 +72,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" onclick="">Finalizar pedido</button>
+                <button type="button" class="btn btn-success" onclick="savePedido()">Finalizar pedido</button>
             </div>
         </div>
     </div>

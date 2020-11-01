@@ -161,7 +161,35 @@
 		public static function loadPaises(){
 			$string = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/uocComElecPR1/resources/paises.json");
 			$json = json_decode($string, true);
+			sort($json["paises"]);
 			return $json["paises"];
+		}
+
+		public static function getPedidos(){
+			$res=array();
+			$data=Model::getPedidos();
+			foreach($data as $d){
+				if(!isset($res[$d["id"]])){
+					$res[$d["id"]]=array(
+						"id"=>$d["id"],
+						"fecha"=>$d["fecha"],
+						"nombre"=>$d["nombre"],
+						"direccion"=>$d["direccion"],
+						"poblacion"=>$d["poblacion"],
+						"cp"=>$d["cp"],
+						"provincia"=>$d["provincia"],
+						"pais"=>$d["pais"],
+						"mail"=>$d["mail"],
+						"productos"=>array()
+					);
+				}
+				$res[$d["id"]]["productos"][]=array(
+					"producto"=>$d["producto"],
+					"precio"=>$d["precio"],
+					"cantidad"=>$d["cantidad"]
+				);
+			}
+			return $res;
 		}
 
 		public static function addPedido(){
@@ -173,6 +201,31 @@
 				$_SESSION["carrito"][$j["id"]]=$j["cantidad"];
 			}
 			return "ok";
+		}
+
+		public static function savePedido(){
+			@session_start();
+
+			$nombre=$_POST["nombre"];
+			$apellidos=$_POST["apellidos"];
+			$direccion=$_POST["direccion"];
+			$poblacion=$_POST["poblacion"];
+			$cp=$_POST["cp"];
+			$provincia=$_POST["provincia"];
+			$pais=$_POST["pais"];
+			$mail=$_POST["mail"];
+
+			$res=Model::insertCabeceraPedido($nombre,$apellidos,$direccion,$poblacion,$cp,$provincia,$pais,$mail);
+			if(is_numeric($res)){
+				foreach($_SESSION["carrito"] as $key => $value){
+					$producto=Model::getProducto($key);
+					$producto=$producto[0];
+					Model::insertLineaPedido($res,$key,$value,$producto["precio"]);
+				}
+				$_SESSION["carrito"]=array();
+				return "ok";
+			}
+			return $res;
 		}
 
 	}

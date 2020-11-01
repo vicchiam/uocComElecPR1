@@ -1,4 +1,4 @@
-var current='public/php/categorias.php';
+var current='public/php/categoria.php';
 
 function navigateTo(url){
 	current=url;
@@ -253,6 +253,9 @@ function addCarrito(){
 }
 
 function openCarrito(){
+	var cantidad=$('#cantidad_carrito').html();
+	if(cantidad.length==0 || cantidad=="0")
+		return alert("No hay productos en el carrito");
     $.get('public/php/carrito.php', {action: 'get-carrito'})
         .done(result => {
         	$('#main').html(result);
@@ -361,4 +364,34 @@ function savePedido(){
 		return alert("Debes indicar la poblacion");
 	if(mail.length==0)
 		return alert("Debes indicar un correo electróinico");
+
+	var regExp=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	if(!regExp.test(mail))
+		return alert("El formato del correo electrónico es incorrecto");
+
+	var obj={
+		action: 'save-pedido',
+		nombre: nombre,
+		apellidos: apellidos,
+		direccion: direccion,
+		poblacion: poblacion,
+		cp: cp,
+		provincia: provincia,
+		pais: pais,
+		mail: mail
+	}
+
+	$.post('php/router.php', obj)
+		.done(result =>{
+			if(result=="ok"){
+				$('#modal-pedido').modal('hide');
+				$('#cantidad_carrito').html(0);
+				$('#cantidad_carrito').addClass('d-none');
+				alert("Pedido realizado correctamente");
+				navigateLast();
+			}
+			else
+				alert(result);
+		})
+
 }

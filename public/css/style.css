@@ -31,9 +31,9 @@ h2{
 }
 
 .btn-img{
-	width: 22px;
+	width: 24px;
 	cursor: pointer;
-	padding: 1px;
+	padding: 0px;
 }
 
 .btn-circle{
@@ -139,4 +139,8 @@ h2{
 	left: -15px;
 	top: 10px;
 	cursor: pointer;
+}
+
+.impar{
+	background-color:#ccc; 
 }
